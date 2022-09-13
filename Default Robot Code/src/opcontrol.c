@@ -15,52 +15,14 @@
 #include "main.h"
 #include "controller.h"
 #include "chassis.h"
-
-// Define Constants (See Us For More Info)
-const double POWER_COEFFICIENT = (127.0 - MINIMUM_MOTOR_POWER) / (127.0 - CONTROLLER_DEADLOCK); // We use this coefficient to compensate for the joystick not starting at 0
+#include "robot.h"
 
 // Define the "operatorControl()" Function
 void operatorControl() {
 
-  // Declare Power Values of the Left and Right Wheel
-  int leftWheelPower;
-  int rightWheelPower;
-
   // Declare an Infinite Loop to Constantly Update During the Match
 	while (1) {
-
-    // Calculate the Left Wheel's Power Starting at the Deadlock Value
-    if (abs(controllerGetLeftJoystickVertical()) >= CONTROLLER_DEADLOCK) {
-      leftWheelPower = controllerGetLeftJoystickVertical() * POWER_COEFFICIENT;
-    } else {
-      leftWheelPower = 0;
-    }
-
-    // Add Minimum Motor Power to the Left Wheel (Using If-Statements in Case the Value is Negative)
-    if (leftWheelPower < 0) {
-      leftWheelPower -= MINIMUM_MOTOR_POWER;
-    } else if (leftWheelPower > 0) {
-      leftWheelPower += MINIMUM_MOTOR_POWER;
-    }
-
-    // Calculate the Right Wheel's Power Starting at the Deadlock Value
-    if (abs(controllerGetRightJoystickVertical()) >= CONTROLLER_DEADLOCK) {
-      rightWheelPower = controllerGetRightJoystickVertical() * POWER_COEFFICIENT;
-    } else {
-      rightWheelPower = 0;
-    }
-
-    // Add Minimum Motor Power to the Right Wheel (Using If-Statements in Case the Value is Negative)
-    if (rightWheelPower < 0) {
-      rightWheelPower -= MINIMUM_MOTOR_POWER;
-    } else if (leftWheelPower > 0) {
-      rightWheelPower += MINIMUM_MOTOR_POWER;
-    }
-
-    // Set wheel speeds
-    startLeftWheel(leftWheelPower);
-    startRightWheel(rightWheelPower);
-
+    updateMovement();
     delay(20);
 	}
 }

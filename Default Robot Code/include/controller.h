@@ -1,12 +1,11 @@
 #ifndef CONTROLLER_H
 
-#include <API.h>
-
 // Declares and defines the main Joystick (Controller)
 #define MAIN_CONTROLLER 1
 
-// Declares and defines settings for certain controller functions and operations
-#define CONTROLLER_DEADLOCK 15
+// Declares and defines values for certain controller functions and operations
+#define MAXIMUM_JOYSTICK_ANALOG_VALUE 127.0
+#define CONTROLLER_DEADLOCK 15.0
 
 // Declares and defines the axis of inputs on the controller's left
 #define LEFT_JOYSTICK_VERTICAL 3
@@ -26,6 +25,8 @@
 
 // Declares the functions in the "controller.h" header
 #define CONTROLLER_H
+
+#include <API.h>
 
 // Declare functions to simplify controller inputs
 int controllerGetLeftJoystickVertical();
