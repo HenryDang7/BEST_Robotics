@@ -7,9 +7,9 @@
 
 #ifndef MAIN_H_
 
-#include <API.h>
-
 #define MAIN_H_
+
+#include <API.h>
 
 void initializeIO();
 void initialize();
